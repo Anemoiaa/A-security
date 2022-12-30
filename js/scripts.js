@@ -217,35 +217,32 @@ $(document).ready(function() {
 	});
 
 
-	const priceOneHour = {
-		bodyguard: 3000,
-		withEng: 1000,
-		withGun: 3000,
-		withCar: 3000,
+	const prices = {
+		oneHour: {
+			bodyguard: 3000,
+			withEng: 1000,
+			withGun: 3000,
+			withCar: 3000,
+		},
+		fromOneToSixHour: {
+			bodyguard: 1500,
+			withEng: 500,
+			withGun: 1000,
+			withCar: 3000,
+		},
+		fromSixToFourteen: {
+			bodyguard: 12000,
+			withEng: 4000,
+			withGun: 6000,
+			withCar: 20000,
+		},
+		fromFourteenToTwentyfour: {
+			bodyguard: 24000,
+			withEng: 8000,
+			withGun: 12000,
+			withCar: 40000,
+		}
 	};
-
-	const priceForOneToSixHour = {
-		bodyguard: 1500,
-		withEng: 500,
-		withGun: 1000,
-		withCar: 3000,
-
-	}
-
-	const priceFromSixToFourteen = {
-		bodyguard: 12000,
-		withEng: 4000,
-		withGun: 6000,
-		withCar: 20000,
-	}
-
-	const priceFromFourteenTotwentyfour = {
-		bodyguard: 24000,
-		withEng: 8000,
-		withGun: 12000,
-		withCar: 40000,
-	}
-
 
 	const additionals = [$("#with-gun"), $("#with-car"), $("#with-eng")];
 	additionals.forEach(element => {
@@ -253,33 +250,29 @@ $(document).ready(function() {
 			function() {
 				calculate($('.calc-range-item-value-1').text(), $('.calc-range-item-value-2').text())
 			}
-		)
-	})
+		);
+	});
 
 	function calculate(duration, bodyguardAmount) {
 		const withGun = $("#with-gun").is(':checked');
 		const withCar = $("#with-car").is(':checked');
 		const withEnglish = $("#with-eng").is(':checked');
+		duration = Number(duration);
 		let kase = null;
-		let bodyguardTotal = 0;
-		let gunTotal = 0;
-		let carTotal = 0;
-		let engTotal = 0;
-		let result = 0;
-		if(Number(duration) === 1){
-			kase = priceOneHour;
-		} else if(Number(duration) <= 6) {
-			kase = priceForOneToSixHour;
-		} else if(Number(duration) <= 14) {
-			kase = priceFromSixToFourteen;
+		if(duration === 1){
+			kase = prices.oneHour;
+		} else if(duration <= 6) {
+			kase = prices.fromOneToSixHour;
+		} else if(duration <= 14) {
+			kase = prices.fromSixToFourteen
 		} else {
-			kase = priceFromFourteenTotwentyfour;
+			kase = prices.fromFourteenToTwentyfour;
 		}
-		bodyguardTotal = kase.bodyguard * bodyguardAmount;
-		gunTotal = bodyguardAmount * (withGun * kase.withGun);
-		carTotal = kase.withCar * withCar;
-		engTotal = kase.withEng * withEnglish;
-		result = bodyguardTotal + gunTotal + carTotal + engTotal;
+		const bodyguardTotal = kase.bodyguard * bodyguardAmount;
+		const gunTotal = bodyguardAmount * (withGun * kase.withGun);
+		const carTotal = kase.withCar * withCar;
+		const engTotal = kase.withEng * withEnglish;
+		const result = new Intl.NumberFormat('ru-RU').format(bodyguardTotal + gunTotal + carTotal + engTotal);
 		$('.calc-total-value').text(result);
 	}
 
