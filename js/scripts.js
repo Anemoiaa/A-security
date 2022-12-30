@@ -235,13 +235,23 @@ $(document).ready(function() {
 	})
 
 	function calculate(duration, bodyguardAmount) {
-		const withGun = $("#with-gun");
-		const withCar = $("#with-car");
-		const withEnglish = $("#with-eng");
+		const withGun = $("#with-gun").is(':checked');
+		const withCar = $("#with-car").is(':checked');
+		const withEnglish = $("#with-eng").is(':checked');
+		let bodyguardTotal = 0;
+		let gunTotal = 0;
+		let carTotal = 0;
+		let engTotal = 0;
 		let result = 0;
 		if(Number(duration) === 1){
-			result = (priceForOneHour.bodyguard * bodyguardAmount) + withGun + withEnglish + withCar;
+			bodyguardTotal = priceForOneHour.bodyguard * bodyguardAmount;
+			gunTotal = bodyguardAmount * (withGun * priceForOneHour.withGun);
+			carTotal = priceForOneHour.withCar * withCar;
+			engTotal = priceForOneHour.withEng * withEnglish;
+			console.log(engTotal);
 		}
+		result = bodyguardTotal + gunTotal + carTotal + engTotal;
+
 		$('.calc-total-value').text(result);
 	}
 
