@@ -170,6 +170,9 @@ $(document).ready(function() {
 		value: 5,
 		slide : function(event, ui) {
 			$('.calc-range-item-value-1').text(ui.value);
+			const duration = ui.value;
+			const bodyguardAmount = $('.calc-range-item-value-2').text();
+			calculate(duration, bodyguardAmount);
 		},
 	});
 	$('.calc-range-item-value-1').text($('.calc-range-1').slider('value'));
@@ -182,6 +185,9 @@ $(document).ready(function() {
 		value: 2,
 		slide : function(event, ui) {
 			$('.calc-range-item-value-2').text(ui.value);
+			const duration = $('.calc-range-item-value-1').text();
+			const bodyguardAmount = ui.value;
+			calculate(duration, bodyguardAmount);
 		},
 	});
 	$('.calc-range-item-value-2').text($('.calc-range-2').slider('value'));
@@ -209,5 +215,35 @@ $(document).ready(function() {
 			$('.calc-tariffs-item-switch-input-3').parents('.calc-tariffs-item-3').removeClass('active');
 		}
 	});
+
+
+	const priceForOneHour = {
+		bodyguard: 3000,
+		withEng: 1000,
+		withGun: 3000,
+		withCar: 3000,
+	};
+
+
+	const additionals = [$("#with-gun"), $("#with-car"), $("#with-eng")];
+	additionals.forEach(element => {
+		element.change(
+			function() {
+				calculate($('.calc-range-item-value-1').text(), $('.calc-range-item-value-2').text())
+			}
+		)
+	})
+
+	function calculate(duration, bodyguardAmount) {
+		const withGun = $("#with-gun");
+		const withCar = $("#with-car");
+		const withEnglish = $("#with-eng");
+		let result = 0;
+		if(Number(duration) === 1){
+			result = (priceForOneHour.bodyguard * bodyguardAmount) + withGun + withEnglish + withCar;
+		}
+		$('.calc-total-value').text(result);
+	}
+
 
 });
