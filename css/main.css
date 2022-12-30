@@ -1494,6 +1494,14 @@ img {
 .calc-radio-input:checked + .calc-radio-custom .calc-radio-icon {
 	opacity: 1; }
 
+.order-modal-wrapper {
+	display: none;
+	width: 50%;
+	max-width: 720px;
+	padding: 80px 40px;
+	border-radius: 15px;
+}
+
 .ui-widget.ui-widget-content {
 	border: none;
 	border-radius: 0; }
@@ -1740,7 +1748,13 @@ img {
 	.auto-item-info {
 		padding-right: 40px; }
 	.calc-total {
-		padding: 30px; } }
+		padding: 30px; }
+	.order-modal-wrapper {
+		width: 100%;
+		padding-left: 5px;
+		padding-right: 5px;
+	} }
+
 
 @media only screen and (max-width: 1023px) {
 	.header-mnu {

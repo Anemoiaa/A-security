@@ -216,6 +216,13 @@ $(document).ready(function() {
 		}
 	});
 
+	$('#order-modal-btn').click(function(){
+		$.fancybox.open({
+			src: '#order-modal',
+			type: 'inline'
+		});
+	});
+
 
 	const prices = {
 		oneHour: {
@@ -275,6 +282,5 @@ $(document).ready(function() {
 		const result = new Intl.NumberFormat('ru-RU').format(bodyguardTotal + gunTotal + carTotal + engTotal);
 		$('.calc-total-value').text(result);
 	}
-
 
 });

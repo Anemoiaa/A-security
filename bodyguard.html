@@ -351,7 +351,16 @@
 				</div>
 				<div class="calc-total">
 					<div class="calc-total-title">Общий итог: <span class="calc-total-value">3 500</span> &#8381;</div>
-					<a href="#" class="calc-total-btn">Оформить заказ</a>
+					<a href="#" id="order-modal-btn" class="calc-total-btn">Оформить заказ</a>
+				</div>
+				<div class="order-modal-wrapper" id="order-modal">
+					<form class="main-form" action="./mail.php" method="post">
+						<label class="main-form-wrap">
+							<input class="main-form-input phone-input" type="tel" name="phone" placeholder="+7 999 999-99-99" required>
+							<button class="main-form-btn" type="submit">Заказать охрану</button>
+						</label>
+						<p class="main-form-text">Нажимая кнопку «Заказать охрану», вы соглашаетесь с <a href="#">условиями обработки данных</a></p>
+					</form>
 				</div>
 			</div>
 		</div>
