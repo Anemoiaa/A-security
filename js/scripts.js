@@ -266,16 +266,18 @@ $(document).ready(function() {
 		const withEnglish = $("#with-eng").is(':checked');
 		duration = Number(duration);
 		let kase = null;
+		let hours = 1;
 		if(duration === 1){
 			kase = prices.oneHour;
-		} else if(duration <= 6) {
+		} else if(duration < 6) {
 			kase = prices.fromOneToSixHour;
-		} else if(duration <= 14) {
+			hours = duration
+		} else if(duration < 14) {
 			kase = prices.fromSixToFourteen
 		} else {
 			kase = prices.fromFourteenToTwentyfour;
 		}
-		const bodyguardTotal = kase.bodyguard * bodyguardAmount;
+		const bodyguardTotal = kase.bodyguard * bodyguardAmount * hours;
 		const gunTotal = bodyguardAmount * (withGun * kase.withGun);
 		const carTotal = kase.withCar * withCar;
 		const engTotal = kase.withEng * withEnglish;
